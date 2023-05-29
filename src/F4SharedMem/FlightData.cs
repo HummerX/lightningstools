@@ -400,11 +400,21 @@ namespace F4SharedMem
         // VERSION 16
         public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
 
-#if EWMU_AND_EWPI_PATCH_APPLIED
-        // VERSION 18?
-        public string[] EWMULines;  //16 usable chars
-        public string[] EWPILines;  //8 usable chars
-#endif
+        // VERSION 18
+        public byte floodConsole;   // (unsigned char) current floodconsole brightness setting, see FloodConsole enum for details
+        
+        // VERSION 19
+        public float magDeviationSystem;    // current mag deviation of the system
+        public float magDeviationReal;      // current mag deviation of the system
+
+        public uint[] ecmBits;// [MAX_ECM_PROGRAMS] see EcmBits enum for details - Note: these are currently not combinable bits, but mutually exclusive states!
+        public EcmOperStates ecmOper;                  // (unsigned char) see enum EcmOperStates for details
+
+        public JammingStates[] RWRjammingStatus; // [MAX_RWR_OBJECTS] (unsigned) char see enum JammingStates for details
+
+
+
+
         public OptionSelectButtonLabel[] leftMFD;
         public OptionSelectButtonLabel[] rightMFD;
         public object ExtensionData;

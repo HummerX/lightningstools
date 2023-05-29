@@ -14,12 +14,12 @@ namespace F4SharedMem.Headers
         Launch = 0x10,	// defined in LightBits2 - missile is fired at ownship
         PriMode = 0x20,	// defined in LightBits2 - priority mode is enabled but more than 5 threat emitters are detected
         Unk = 0x40,	// defined in LightBits2 - unknown is not active but EWS detects unknown radar
-
-        // not working yet, defined for future use
         Elec_Fault = 0x80,	// defined in LightBits3 - non-resetting fault
         OXY_BROW = 0x100,	// defined in LightBits  - monitor fault during Obogs
         EPUOn = 0x200,	// defined in LightBits3 - abnormal EPU operation
         JFSOn_Slow = 0x400,	// defined in LightBits3 - slow blinking: non-critical failure
         JFSOn_Fast = 0x800,	// defined in LightBits3 - fast blinking: critical failure
+        // V19
+        ECM_Oper = 0x1000,  // defined in EcmOperStates - system warming up
     };
 }

@@ -30,8 +30,9 @@ namespace F4SharedMem.Headers
         public const int RWRINFO_SIZE = 512;
         public const int MAX_CALLSIGNS = 32;
         public const int CALLSIGN_LEN = 12;
-
-
+        //19
+        public const int MAX_ECM_PROGRAMS = 5;
+        public const int MAX_RWR_OBJECTS = 40;
         // VERSION 1
         public float nozzlePos2;   // Ownship engine nozzle2 percent open (0-100)
         public float rpm2;         // Ownship engine rpm2 (Percent 0-103)
@@ -123,15 +124,20 @@ namespace F4SharedMem.Headers
         public uint DrawingAreaSize;// the overall size of the DrawingData/FalconSharedMemoryAreaDrawing area
 
         // VERSION 16
-        float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
+        public float turnRate;              // actual turn rate (no delay or dampening) in degrees/second
 
-#if EWMU_AND_EWPI_PATCH_APPLIED
-        //VERSION 18?
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public EWMU_LineOfText[] EWMULines;  //16 usable chars
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
-        public EWPI_LineOfText[] EWPILines;  //8 usable chars
-#endif
+        // VERSION 18
+        public byte floodConsole;   // (unsigned char) current floodconsole brightness setting, see FloodConsole enum for details
+
+        // VERSION 19
+        public float magDeviationSystem;    // current mag deviation of the system
+        public float magDeviationReal;      // current mag deviation of the system
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_ECM_PROGRAMS)]
+        public uint[] ecmBits;              // [MAX_ECM_PROGRAMS] see EcmBits enum for details - Note: these are currently not combinable bits, but mutually exclusive states!
+        EcmOperStates ecmOper;                  // (unsigned char) see enum EcmOperStates for details
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_RWR_OBJECTS)]
+        JammingStates[] RWRjammingStatus; // (unsigned) char [MAX_RWR_OBJECTS] see enum JammingStates for details
+
     }
 
 }
